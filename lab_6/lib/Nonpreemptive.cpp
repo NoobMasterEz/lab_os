@@ -14,23 +14,42 @@ struct Process_2
 // time 
 bool comparison(Process_2 a, Process_2 b) 
 { 
-     return (a.at < b.at); 
+     if(a.at == b.at) 
+    { 
+    return a.bt<b.bt; 
+    } 
+    else
+    { 
+        return a.at<b.at; 
+    } 
 } 
   
 // Function to find the waiting time for all 
 // Process_2es 
 void findWaitingTime(Process_2 proc[], int n, int wt[]) 
-{ 
-    // waiting time for first Process_2 is 0 
-    wt[0] = 0; 
+{
+// declaring service array that stores cumulative burst time  
+int service[50]; 
   
-    // calculating waiting time 
-    for (int i = 1; i < n ; i++ ) 
-    {
-        wt[i] = proc[i-1].bt + wt[i-1] ; 
-     
-    }
-
+// Initilising initial elements of the arrays 
+service[0]=0; 
+wt[0]=0; 
+  
+  
+for(int i=1;i<n;i++) 
+{ 
+service[i]=proc[i-1].bt+service[i-1]; 
+  
+wt[i]=service[i]-proc[i].at+1; 
+  
+// If waiting time is negative, change it into zero 
+      
+    if(wt[i]<0) 
+    { 
+    wt[i]=0; 
+    } 
+} 
+  
 } 
   
 // Function to calculate turn around time 
@@ -101,11 +120,12 @@ void findavgTime(Process_2 proc[], int n)
 int main_Non_preemptive()
 { 
 
-    Process_2 proc[] = {{1, 9,1}, {2, 3,1}, {3, 5,3}, {4, 4,4},{5,2,7}};
+    Process_2 proc[] = {{1, 10,1}, {2, 4,1}, {3, 7,5}, {4, 5,6},{5,12,15},{6,16,6}};
     int n = sizeof proc / sizeof proc[0]; 
     
     // Sorting Process_2es by burst time. 
     sort(proc, proc + n, comparison); 
+    
     
 
      cout<<"------------------------------------------------------------------------------------\n";
