@@ -43,6 +43,9 @@ switch (choice)
 	case '4':
 	 main_priority();
 		break;
+	case '5':
+		blanker();
+		break;
 	case 'q':
 		gameOn=false;
 		break;
