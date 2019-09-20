@@ -4,4 +4,6 @@ int main_Non_preemptive();
 int main_preemptive();
 int main_Round_Robin();
 int main_priority();
+//lab6
+int blanker();
 #endif 
